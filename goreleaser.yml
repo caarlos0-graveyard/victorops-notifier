@@ -1,0 +1,16 @@
+build:
+  env:
+   - CGO_ENABLED=0
+  goos:
+    - darwin
+  goarch:
+    - amd64
+brew:
+  github:
+    owner: caarlos0
+    name: homebrew-tap
+  folder: Formula
+  homepage: https://github.com/caarlos0/victorops-notifier
+  description: An unofficial VictorOps desktop notifier for macOS
+  dependencies:
+    - terminal-notifier

@@ -1,0 +1,13 @@
+language: go
+go: 1.8.3
+install:
+  - go get -u github.com/golang/dep/cmd/dep
+  - dep ensure
+script:
+  # TODO: add tests et al
+  - go build ./...
+after_success:
+  # TODO: - bash <(curl -s https://codecov.io/bash)
+  - test -n "$TRAVIS_TAG" && go run main.go
+notifications:
+  email: false
