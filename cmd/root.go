@@ -2,14 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 
-	"golang.org/x/sync/errgroup"
-
 	victorops "github.com/caarlos0/go-victorops"
 	"github.com/spf13/cobra"
+	"golang.org/x/sync/errgroup"
 )
 
 const popup = "https://portal.victorops.com/client/%v/popoutIncident?incidentName=%v"
@@ -27,7 +25,8 @@ var RootCmd = &cobra.Command{
 		var cli = victorops.New("", apiID, apiKey)
 		incidents, err := cli.Incidents()
 		if err != nil {
-			log.Fatalln(err)
+			fmt.Println(err)
+			os.Exit(1)
 		}
 		var g errgroup.Group
 		for _, incident := range incidents {
@@ -38,7 +37,10 @@ var RootCmd = &cobra.Command{
 				})
 			}
 		}
-		g.Wait()
+		if err := g.Wait(); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 	},
 }
 
