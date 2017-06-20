@@ -17,7 +17,9 @@ The idea is to keep it running. You can do that with any shell loop or
 by putting it in the crontab.
 
 ```crontab
-* * * * * /usr/local/bin/victorops-notifier --client client-name --id api-id --key api-key
+PATH="/usr/local/bin/"
+
+* * * * * victorops-notifier --client client-name --id api-id --key api-key
 ```
 
 You can get the client name from the URL when you're logged in, something like
